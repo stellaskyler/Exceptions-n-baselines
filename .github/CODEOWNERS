@@ -1,0 +1,5 @@
+* @platform-governance
+baseline-catalog/** @platform-governance @security-governance
+exception-registry/** @risk-office @security-governance
+policy-engine/** @platform-governance @security-governance
+integration-servicenow-github/** @platform-governance

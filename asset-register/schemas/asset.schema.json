@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Asset",
+  "type": "object",
+  "required": ["asset_id", "asset_type", "owner", "criticality", "data_classification", "environment"],
+  "properties": {
+    "asset_id": {"type": "string", "pattern": "^ASSET-[A-Z0-9_-]+$"},
+    "asset_type": {"type": "string"},
+    "system_of_record_ref": {"type": "object"},
+    "owner": {"type": "object"},
+    "business_unit": {"type": "string"},
+    "criticality": {"enum": ["low", "medium", "high", "mission_critical"]},
+    "data_classification": {"enum": ["public", "internal", "confidential", "restricted"]},
+    "environment": {"enum": ["prod", "staging", "dev"]},
+    "github": {"type": "object"},
+    "tags": {"type": "array", "items": {"type": "string"}}
+  }
+}

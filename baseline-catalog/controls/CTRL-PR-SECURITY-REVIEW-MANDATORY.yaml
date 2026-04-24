@@ -1,0 +1,8 @@
+{
+  "control_id": "CTRL-PR-SECURITY-REVIEW-MANDATORY",
+  "objective": "Require at least one security review",
+  "rationale": "Reduce security review bypass risk",
+  "test_method": "action",
+  "enforcement_mode": "soft_fail",
+  "implementation": {"check": "security_reviewer_required"}
+}

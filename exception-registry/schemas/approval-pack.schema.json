@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ApprovalPack",
+  "type": "object",
+  "required": ["exception_request_id", "workflow_instance_id", "approvals"],
+  "properties": {
+    "exception_request_id": {"type": "string"},
+    "workflow_instance_id": {"type": "string"},
+    "approvals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["approval_id", "role", "approver", "decision", "decided_at"],
+        "properties": {
+          "approval_id": {"type": "string"},
+          "role": {"type": "string"},
+          "approver": {"type": "string"},
+          "decision": {"enum": ["approved", "rejected"]},
+          "decided_at": {"type": "string", "format": "date-time"}
+        }
+      }
+    }
+  }
+}

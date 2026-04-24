@@ -1,0 +1,22 @@
+name: New exception request
+description: Request a new temporary deviation/waiver
+title: "[Exception] <asset_id> <control_id>"
+body:
+  - type: input
+    id: asset_id
+    attributes:
+      label: Asset ID
+    validations:
+      required: true
+  - type: input
+    id: baseline_id
+    attributes:
+      label: Baseline ID
+    validations:
+      required: true
+  - type: input
+    id: control_id
+    attributes:
+      label: Control ID
+    validations:
+      required: true

@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ReconciliationReport",
+  "type": "object",
+  "required": ["missing_pr", "stale_sn_status", "expired_mismatch", "field_drift"],
+  "properties": {
+    "missing_pr": {"type": "integer", "minimum": 0},
+    "stale_sn_status": {"type": "integer", "minimum": 0},
+    "expired_mismatch": {"type": "integer", "minimum": 0},
+    "field_drift": {"type": "integer", "minimum": 0}
+  }
+}

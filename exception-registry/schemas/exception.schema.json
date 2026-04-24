@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Exception",
+  "type": "object",
+  "required": [
+    "exception_id", "asset_id", "exception_type", "state", "valid_from", "valid_until", "justification"
+  ],
+  "properties": {
+    "exception_id": {"type": "string", "pattern": "^(EX-[0-9]{6}|EXR-[0-9]{4}-[0-9]{6})$"},
+    "asset_id": {"type": "string"},
+    "baseline_id": {"type": "string"},
+    "control_ids": {"type": "array", "items": {"type": "string"}},
+    "exception_type": {"enum": ["waiver", "risk_acceptance", "compensating_control", "temporary_deviation"]},
+    "state": {"enum": ["draft", "submitted", "approved", "active", "expired", "revoked", "rejected"]},
+    "valid_from": {"type": "string", "format": "date"},
+    "valid_until": {"type": "string", "format": "date"},
+    "max_renewals": {"type": "integer", "minimum": 0},
+    "justification": {"type": "string", "minLength": 20},
+    "risk_statement": {"type": "string"},
+    "compensating_controls": {"type": "array", "items": {"type": "string"}, "default": []}
+  }
+}

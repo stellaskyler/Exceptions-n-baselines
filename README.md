@@ -684,3 +684,23 @@ The smallest credible implementation:
 - Auditors can trace one control decision from baseline commit -> exception approval -> PR gate outcome -> evidence record.
 
 This MVP is intentionally narrow but production-realistic; it establishes data contracts, approval rigor, and enforcement paths that scale to non-repo assets and broader domains.
+
+---
+
+## Implementation Scaffold (Code)
+
+This repository now includes executable scaffolding for:
+- governance schemas and sample records,
+- policy evaluation engine modules,
+- ServiceNow-to-GitHub integration stubs with idempotency,
+- GitHub Actions workflow templates,
+- schema/contract/unit/integration tests.
+
+### Quickstart
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -e .[dev]
+make all
+```

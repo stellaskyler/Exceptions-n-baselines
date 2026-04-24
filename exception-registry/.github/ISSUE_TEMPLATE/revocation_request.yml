@@ -1,0 +1,10 @@
+name: Revocation request
+description: Request exception revocation
+title: "[Revoke] <exception_id>"
+body:
+  - type: input
+    id: exception_id
+    attributes:
+      label: Exception ID
+    validations:
+      required: true
