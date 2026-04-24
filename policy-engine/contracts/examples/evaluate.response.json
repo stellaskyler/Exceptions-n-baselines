@@ -1,0 +1,9 @@
+{
+  "asset_id": "ASSET-REPO-org-cloud-networking-iac",
+  "evaluated_on": "2026-04-24",
+  "all_required_pass": true,
+  "decisions": [
+    {"control_id": "CTRL-GH-BRANCH-PROTECT", "passed": true, "waived": false, "reason": "control_passed"},
+    {"control_id": "CTRL-GH-CODEOWNERS", "passed": false, "waived": true, "reason": "waived_by:EXR-2026-000184"}
+  ]
+}

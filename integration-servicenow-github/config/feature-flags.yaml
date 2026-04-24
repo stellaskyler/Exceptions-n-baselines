@@ -1,0 +1,4 @@
+enable_issue_creation: true
+enable_pr_creation: true
+enable_webhook_callbacks: true
+reconcile_hourly: true

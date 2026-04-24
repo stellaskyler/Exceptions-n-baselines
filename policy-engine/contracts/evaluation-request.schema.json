@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EvaluationRequest",
+  "type": "object",
+  "required": ["asset_id"],
+  "properties": {
+    "asset_id": {"type": "string"},
+    "decision_date": {"type": "string", "format": "date"},
+    "check_results": {"type": "object", "additionalProperties": {"type": "boolean"}}
+  }
+}

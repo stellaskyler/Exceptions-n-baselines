@@ -1,0 +1,14 @@
+exception_id: EXR-2026-000184
+asset_id: ASSET-REPO-org-cloud-networking-iac
+baseline_id: BL-CLOUD-FOUNDATIONAL
+control_ids: [CTRL-GH-CODEOWNERS]
+exception_type: temporary_deviation
+state: active
+justification: >-
+  Team is migrating monorepo ownership model; temporary CODEOWNERS mismatch
+  expected for 14 days while service boundaries are split.
+risk_statement: Unauthorized review bypass risk mitigated by mandatory security reviewer assignment.
+compensating_controls: [CTRL-PR-SECURITY-REVIEW-MANDATORY]
+valid_from: 2026-04-10
+valid_until: 2026-04-24
+max_renewals: 1

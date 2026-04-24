@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Baseline",
+  "type": "object",
+  "required": ["baseline_id", "name", "version", "status", "scope", "controls"],
+  "properties": {
+    "baseline_id": {"type": "string", "pattern": "^BL-[A-Z0-9_-]+$"},
+    "name": {"type": "string"},
+    "version": {"type": "string"},
+    "status": {"enum": ["draft", "approved", "deprecated"]},
+    "scope": {
+      "type": "object",
+      "required": ["asset_types"],
+      "properties": {
+        "asset_types": {"type": "array", "items": {"type": "string"}},
+        "tags_all": {"type": "array", "items": {"type": "string"}},
+        "env_in": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "controls": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["control_id", "required"],
+        "properties": {
+          "control_id": {"type": "string"},
+          "required": {"type": "boolean"}
+        }
+      }
+    }
+  }
+}

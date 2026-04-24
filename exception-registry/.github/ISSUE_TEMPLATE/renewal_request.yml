@@ -1,0 +1,10 @@
+name: Renewal request
+description: Request exception renewal
+title: "[Renewal] <exception_id>"
+body:
+  - type: input
+    id: exception_id
+    attributes:
+      label: Exception ID
+    validations:
+      required: true

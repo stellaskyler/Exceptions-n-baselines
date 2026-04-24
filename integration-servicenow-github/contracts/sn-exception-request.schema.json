@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ServiceNowExceptionSyncRequest",
+  "type": "object",
+  "required": ["exception_request_id", "idempotency_key", "request_state"],
+  "properties": {
+    "exception_request_id": {"type": "string"},
+    "workflow_instance_id": {"type": "string"},
+    "request_state": {"type": "string"},
+    "idempotency_key": {"type": "string"},
+    "version": {"type": "integer", "minimum": 1}
+  }
+}

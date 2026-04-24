@@ -1,0 +1,8 @@
+{
+  "asset_id": "ASSET-REPO-org-cloud-networking-iac",
+  "check_results": {
+    "CTRL-GH-BRANCH-PROTECT": true,
+    "CTRL-GH-CODEOWNERS": false,
+    "CTRL-PR-SECURITY-REVIEW-MANDATORY": true
+  }
+}

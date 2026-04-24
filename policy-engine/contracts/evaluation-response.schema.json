@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EvaluationResponse",
+  "type": "object",
+  "required": ["asset_id", "evaluated_on", "decisions", "all_required_pass"],
+  "properties": {
+    "asset_id": {"type": "string"},
+    "evaluated_on": {"type": "string", "format": "date"},
+    "all_required_pass": {"type": "boolean"},
+    "decisions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["control_id", "passed", "waived", "reason"],
+        "properties": {
+          "control_id": {"type": "string"},
+          "passed": {"type": "boolean"},
+          "waived": {"type": "boolean"},
+          "reason": {"type": "string"}
+        }
+      }
+    }
+  }
+}

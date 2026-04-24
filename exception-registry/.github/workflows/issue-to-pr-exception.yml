@@ -1,0 +1,10 @@
+name: issue-to-pr-exception
+on:
+  issues:
+    types: [opened, edited]
+jobs:
+  scaffold:
+    if: contains(github.event.issue.title, '[Exception]')
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Placeholder: parse issue form and open PR via bot"

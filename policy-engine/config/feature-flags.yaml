@@ -1,0 +1,6 @@
+advisory_mode: false
+pilot_repo_allowlist:
+  - org-cloud/networking-iac
+max_exception_validity_days: 30
+max_renewals_default: 1
+emergency_exception_ttl_hours: 72

@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Control",
+  "type": "object",
+  "required": ["control_id", "objective", "test_method", "enforcement_mode", "implementation"],
+  "properties": {
+    "control_id": {"type": "string", "pattern": "^CTRL-[A-Z0-9_-]+$"},
+    "objective": {"type": "string"},
+    "rationale": {"type": "string"},
+    "test_method": {"enum": ["github_native", "action", "app", "external"]},
+    "enforcement_mode": {"enum": ["advisory", "soft_fail", "hard_fail"]},
+    "implementation": {"type": "object"},
+    "evidence_contract": {"type": "object"}
+  }
+}

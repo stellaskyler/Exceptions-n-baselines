@@ -1,0 +1,15 @@
+name: reconcile-sn-sync
+on:
+  schedule:
+    - cron: '15 * * * *'
+  workflow_dispatch:
+jobs:
+  reconcile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -e .
+      - run: python -c "import sys; sys.path.append('integration-servicenow-github'); from app.main import post_reconcile_run; print(post_reconcile_run())"

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SyncResponse",
+  "type": "object",
+  "required": ["status", "correlation"],
+  "properties": {
+    "status": {"enum": ["created", "deduplicated"]},
+    "correlation": {
+      "type": "object",
+      "required": ["exception_request_id", "version", "pull_request_url", "exception_record_id"],
+      "properties": {
+        "exception_request_id": {"type": "string"},
+        "version": {"type": "integer"},
+        "pull_request_url": {"type": "string"},
+        "exception_record_id": {"type": "string"}
+      }
+    }
+  }
+}
