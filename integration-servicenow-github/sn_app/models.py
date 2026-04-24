@@ -7,3 +7,4 @@ class Correlation:
     version: int
     pull_request_url: str
     exception_record_id: str
+    github_state: str = "submitted"
