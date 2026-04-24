@@ -10,12 +10,20 @@ import yaml
 from jsonschema import validate
 
 
+SUPPORTED_YAML_EXTENSIONS = ("*.yaml", "*.yml")
+
+
 def _load_json(path: Path) -> dict:
     return json.loads(path.read_text())
 
 
 def _load_yaml(path: Path) -> dict:
     return yaml.safe_load(path.read_text())
+
+
+def _iter_yaml_files(data_dir: Path):
+    for pattern in SUPPORTED_YAML_EXTENSIONS:
+        yield from data_dir.rglob(pattern)
 
 
 def main() -> None:
@@ -27,7 +35,7 @@ def main() -> None:
     ]
     for data_dir, schema_path in mappings:
         schema = _load_json(schema_path)
-        for file in data_dir.rglob('*.yaml'):
+        for file in _iter_yaml_files(data_dir):
             validate(instance=_load_yaml(file), schema=schema)
             print(f'validated {file}')
 
