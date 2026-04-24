@@ -1,19 +1,22 @@
 from __future__ import annotations
 
 from pathlib import Path
+import os
 
 from .github_client import MockGitHubClient
 from .idempotency_store import FileIdempotencyStore
 from .models import Correlation
 
 
-STORE = FileIdempotencyStore(Path('.cache/idempotency.json'))
+IDEMPOTENCY_STORE_PATH = Path(os.environ.get('IDEMPOTENCY_STORE_PATH', '.cache/idempotency.json'))
+STORE = FileIdempotencyStore(IDEMPOTENCY_STORE_PATH)
 GH = MockGitHubClient()
 
 
-def sync_exception(payload: dict) -> dict:
+def sync_exception(payload: dict, store: FileIdempotencyStore | None = None) -> dict:
+    store = store or STORE
     key = payload["idempotency_key"]
-    existing = STORE.get(key)
+    existing = store.get(key)
     if existing:
         return {"status": "deduplicated", "correlation": existing.__dict__}
 
@@ -26,5 +29,5 @@ def sync_exception(payload: dict) -> dict:
         pull_request_url=created["pr_url"],
         exception_record_id=created["record_id"],
     )
-    STORE.put(key, correlation)
+    store.put(key, correlation)
     return {"status": "created", "correlation": correlation.__dict__}

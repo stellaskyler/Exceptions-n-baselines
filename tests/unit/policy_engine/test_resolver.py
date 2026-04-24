@@ -7,8 +7,8 @@ sys.path.insert(0, 'policy-engine')
 from app.resolver import resolve_required_controls
 
 
-def test_resolve_required_controls_matches_asset_scope(tmp_path: Path) -> None:
-    baseline = {
+def _baseline() -> dict:
+    return {
         'baseline_id': 'BL-TEST',
         'name': 'test',
         'version': '1.0',
@@ -17,8 +17,19 @@ def test_resolve_required_controls_matches_asset_scope(tmp_path: Path) -> None:
         'controls': [{'control_id': 'CTRL-A', 'required': True}],
         'rollout': {'effective_from': '2026-01-01'},
     }
+
+
+def test_resolve_required_controls_matches_asset_scope(tmp_path: Path) -> None:
     file = tmp_path / 'b.yaml'
-    file.write_text(json.dumps(baseline))
+    file.write_text(json.dumps(_baseline()))
+    asset = {'asset_type': 'repo', 'tags': ['regulated'], 'environment': 'prod'}
+    controls = resolve_required_controls(asset, tmp_path, now=date(2026, 4, 24))
+    assert controls == ['CTRL-A']
+
+
+def test_resolve_required_controls_supports_yml(tmp_path: Path) -> None:
+    file = tmp_path / 'b.yml'
+    file.write_text(json.dumps(_baseline()))
     asset = {'asset_type': 'repo', 'tags': ['regulated'], 'environment': 'prod'}
     controls = resolve_required_controls(asset, tmp_path, now=date(2026, 4, 24))
     assert controls == ['CTRL-A']

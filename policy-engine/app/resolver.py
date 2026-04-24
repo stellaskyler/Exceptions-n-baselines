@@ -30,7 +30,7 @@ def _scope_matches(scope: dict, asset: dict) -> bool:
 def resolve_required_controls(asset: dict, baseline_dir: Path, now: date | None = None) -> list[str]:
     now = now or date.today()
     required: list[str] = []
-    for file in sorted(baseline_dir.glob("*.yaml")):
+    for file in sorted([*baseline_dir.glob("*.yaml"), *baseline_dir.glob("*.yml")]):
         baseline = yaml.safe_load(file.read_text())
         if baseline.get("status") != "approved":
             continue
