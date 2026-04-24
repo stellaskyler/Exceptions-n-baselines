@@ -2,8 +2,8 @@ from pathlib import Path
 import sys
 
 sys.path.insert(0, 'integration-servicenow-github')
-from app.idempotency_store import FileIdempotencyStore
-from app.models import Correlation
+from sn_app.idempotency_store import FileIdempotencyStore
+from sn_app.models import Correlation
 
 
 def test_idempotency_store_roundtrip(tmp_path: Path) -> None:

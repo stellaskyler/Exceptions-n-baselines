@@ -1,11 +1,10 @@
 from datetime import date
 from pathlib import Path
-from importlib.util import module_from_spec, spec_from_file_location
-import yaml
+import json
+import sys
 
-spec = spec_from_file_location('exception_store', 'policy-engine/app/exception_store.py')
-exception_store = module_from_spec(spec)
-spec.loader.exec_module(exception_store)
+sys.path.insert(0, 'policy-engine')
+from app.exception_store import load_active_exceptions
 
 
 def test_expired_exception_not_loaded(tmp_path: Path) -> None:
@@ -17,5 +16,5 @@ def test_expired_exception_not_loaded(tmp_path: Path) -> None:
         'valid_until': '2026-04-01',
     }
     p = tmp_path / 'e.yaml'
-    p.write_text(yaml.safe_dump(record))
-    assert exception_store.load_active_exceptions(tmp_path, 'ASSET-1', now=date(2026, 4, 24)) == {}
+    p.write_text(json.dumps(record))
+    assert load_active_exceptions(tmp_path, 'ASSET-1', now=date(2026, 4, 24)) == {}

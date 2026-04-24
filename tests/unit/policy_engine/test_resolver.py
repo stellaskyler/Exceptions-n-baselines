@@ -1,11 +1,10 @@
 from datetime import date
-from importlib.util import module_from_spec, spec_from_file_location
 from pathlib import Path
-import yaml
+import json
+import sys
 
-spec = spec_from_file_location('resolver', 'policy-engine/app/resolver.py')
-resolver = module_from_spec(spec)
-spec.loader.exec_module(resolver)
+sys.path.insert(0, 'policy-engine')
+from app.resolver import resolve_required_controls
 
 
 def test_resolve_required_controls_matches_asset_scope(tmp_path: Path) -> None:
@@ -19,7 +18,7 @@ def test_resolve_required_controls_matches_asset_scope(tmp_path: Path) -> None:
         'rollout': {'effective_from': '2026-01-01'},
     }
     file = tmp_path / 'b.yaml'
-    file.write_text(yaml.safe_dump(baseline))
+    file.write_text(json.dumps(baseline))
     asset = {'asset_type': 'repo', 'tags': ['regulated'], 'environment': 'prod'}
-    controls = resolver.resolve_required_controls(asset, tmp_path, now=date(2026, 4, 24))
+    controls = resolve_required_controls(asset, tmp_path, now=date(2026, 4, 24))
     assert controls == ['CTRL-A']

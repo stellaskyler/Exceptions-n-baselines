@@ -1,7 +1,8 @@
-control_id: CTRL-GH-CODEOWNERS
-objective: Require ownership-based review
-rationale: Ensure designated owners review key changes
-test_method: github_native
-enforcement_mode: hard_fail
-implementation:
-  check: codeowners_present
+{
+  "control_id": "CTRL-GH-CODEOWNERS",
+  "objective": "Require ownership-based review",
+  "rationale": "Ensure designated owners review key changes",
+  "test_method": "github_native",
+  "enforcement_mode": "hard_fail",
+  "implementation": {"check": "codeowners_present"}
+}

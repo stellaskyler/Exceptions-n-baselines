@@ -1,7 +1,8 @@
-control_id: CTRL-GH-BRANCH-PROTECT
-objective: Enforce PRs on default branch
-rationale: Prevent direct commits to critical branches
-test_method: github_native
-enforcement_mode: hard_fail
-implementation:
-  check: require_pull_request
+{
+  "control_id": "CTRL-GH-BRANCH-PROTECT",
+  "objective": "Enforce PRs on default branch",
+  "rationale": "Prevent direct commits to critical branches",
+  "test_method": "github_native",
+  "enforcement_mode": "hard_fail",
+  "implementation": {"check": "require_pull_request"}
+}

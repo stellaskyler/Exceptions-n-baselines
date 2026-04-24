@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from datetime import datetime
+from datetime import datetime, timezone
 
 
 class MockGitHubClient:
@@ -9,5 +9,5 @@ class MockGitHubClient:
         return {
             "pr_number": pr_number,
             "pr_url": f"https://github.com/org-governance/exception-registry/pull/{pr_number}",
-            "record_id": f"EXR-{datetime.utcnow().year}-{pr_number:06d}",
+            "record_id": f"EXR-{datetime.now(timezone.utc).year}-{pr_number:06d}",
         }

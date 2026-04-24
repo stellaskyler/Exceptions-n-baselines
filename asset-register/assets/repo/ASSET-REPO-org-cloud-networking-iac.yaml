@@ -1,13 +1,14 @@
-asset_id: ASSET-REPO-org-cloud-networking-iac
-asset_type: repo
-owner:
-  team_slug: networking-platform
-  manager_upn: manager@example.com
-business_unit: Cloud
-criticality: high
-data_classification: restricted
-environment: prod
-github:
-  org: org-cloud
-  repo: networking-iac
-tags: [regulated, internet-facing]
+{
+  "asset_id": "ASSET-REPO-org-cloud-networking-iac",
+  "asset_type": "repo",
+  "owner": {
+    "team_slug": "networking-platform",
+    "manager_upn": "manager@example.com"
+  },
+  "business_unit": "Cloud",
+  "criticality": "high",
+  "data_classification": "restricted",
+  "environment": "prod",
+  "github": {"org": "org-cloud", "repo": "networking-iac"},
+  "tags": ["regulated", "internet-facing"]
+}
