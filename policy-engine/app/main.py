@@ -31,7 +31,47 @@ def evaluate(request: dict[str, Any]) -> dict[str, Any]:
 
 
 def simulate_impact(request: dict[str, Any]) -> dict[str, Any]:
-    return {"status": "ok", "request": request}
+    asset_id = request["asset_id"]
+    now = date.fromisoformat(request.get("decision_date", date.today().isoformat()))
+    asset = load_asset(asset_id)
+    required_controls = resolve_required_controls(asset, Path(BASELINE_DIR), now=now)
+    active_exceptions = load_active_exceptions(Path(EXCEPTION_DIR), asset_id=asset_id, now=now)
+
+    scenarios = request.get("scenarios", [])
+    if not scenarios:
+        scenarios = [{"name": "current", "check_results": request.get("check_results", {})}]
+
+    projections: list[dict[str, Any]] = []
+    for scenario in scenarios:
+        scenario_name = scenario.get("name", "unnamed")
+        scenario_checks = scenario.get("check_results", {})
+        evaluation = evaluate_controls(
+            asset_id=asset_id,
+            required_controls=required_controls,
+            check_results=scenario_checks,
+            active_exceptions=active_exceptions,
+            now=now,
+        ).to_dict()
+        decisions = evaluation["decisions"]
+        projections.append(
+            {
+                "name": scenario_name,
+                "all_required_pass": evaluation["all_required_pass"],
+                "failed_controls": [d["control_id"] for d in decisions if not d["passed"] and not d["waived"]],
+                "waived_controls": [d["control_id"] for d in decisions if d["waived"]],
+                "pass_rate": 0.0 if not decisions else round(sum(1 for d in decisions if d["passed"] or d["waived"]) / len(decisions), 4),
+                "decisions": decisions,
+            }
+        )
+
+    return {
+        "status": "ok",
+        "asset_id": asset_id,
+        "evaluated_on": now.isoformat(),
+        "required_controls": required_controls,
+        "projection_count": len(projections),
+        "projections": projections,
+    }
 
 
 if __name__ == "__main__":
